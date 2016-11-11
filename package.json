@@ -1,0 +1,53 @@
+{
+    "name": "tabfile-header-generator",
+    "displayName": "tabfile-header-generator",
+    "description": "Parse .tab file and auto generate the header parser",
+    "version": "0.0.1",
+    "publisher": "gcmiao",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.sayHello",
+        "onCommand:extension.generateHeader"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [{
+            "command": "extension.sayHello",
+            "title": "Hello World"
+        }, {
+            "command": "extension.generateHeader",
+            "title": "GenerateTabfileHeader"
+        }],
+        "menus": {
+			"editor/context":[                                                     
+				{   
+                    "when": "editorHasSelection && editorLangId == lua",
+                    "title:": "GenerateTabfileHeader",
+                    "command": "extension.generateHeader",                                                                                                
+					"group": "1_modification"                      
+				}                            
+			]
+		} 
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "line-reader": "nickewing/line-reader"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32",
+        "line-reader": "nickewing/line-reader"
+    }
+}
