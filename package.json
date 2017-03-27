@@ -2,10 +2,10 @@
   "name": "tabfile-header-generator",
   "displayName": "tabfile-header-generator",
   "description": "Parse .tab file and auto generate the header parser",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "publisher": "gcmiao",
   "engines": {
-    "vscode": "^1.5.0"
+    "vscode": "^1.7.0"
   },
   "categories": [
     "Other"
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "typescript": "^2.0.3",
-    "vscode": "^1.0.0",
+    "vscode": "^1.7.0",
     "mocha": "^2.3.3",
     "@types/node": "^6.0.40",
     "@types/mocha": "^2.2.32"

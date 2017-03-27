@@ -120,6 +120,9 @@ function GenerateLineParseCode(columnNames : string[], columnTypes : string[]) {
     for (let i = 0; i < columnNames.length; i++) {
         let columnName = columnNames[i]
         let columnType = (columnTypes != null && i < columnTypes.length) ? columnTypes[i] : ""
+        if (columnType.startsWith('_')) {
+            continue
+        }
         // add type symbol
         let lineParser = "NewTemplate." + GetColumnTypePrefix(columnType)
         // convert low_case_with_underline to PascalCase
@@ -134,7 +137,7 @@ function GenerateLineParseCode(columnNames : string[], columnTypes : string[]) {
         generateCode[generateLineIdx++] = lineParser
     }
     AddIntentSpace(generateCode, 4)
-    let nextStartIdx = AlignWithCharacter(generateCode, 1, "=", 0)
+    let nextStartIdx = AlignWithCharacter(generateCode, 1, "=", 0, true)
     nextStartIdx = AlignWithCharacter(generateCode, 1, ",", nextStartIdx)
     nextStartIdx = AlignWithCharacter(generateCode, 1, ",", nextStartIdx, true)
     nextStartIdx = AlignWithCharacter(generateCode, 1, ",", nextStartIdx)
@@ -210,8 +213,18 @@ function GetParserType(columnType : string) {
             return "Parser.TypeString"
         case "bool":
             return "Parser.TypeBool"
-        case "loc":
+        case "l10n":
             return "Parser.TypeL10N"
+        case "int_array":
+            return "Parser.TypeArrayInt"
+        case "string_array":
+            return "Parser.TypeArrayString"
+        case "float_array":
+            return "Parser.TypeArrayFloat"
+        case "bool_array":
+            return "Parser.TypeArrayBool"
+        case "loc_array":
+            return "Parser.TypeArrayL10N"
     }
     return "\"\""
 }
@@ -226,8 +239,18 @@ function GetDefaultValueByColumnType(columnType : string) {
             return "\"\""
         case "bool":
             return "false"
-        case "loc":
-            return "\"\""
+        case "l10n":
+            return "L10N.NullString"
+        case "int_array":
+            return "nil"
+        case "string_array":
+            return "nil"
+        case "float_array":
+            return "nil"
+        case "bool_array":
+            return "nil"
+        case "loc_array":
+            return "nil"
     }
     return "\"\""
 }
@@ -237,13 +260,23 @@ function GetColumnTypePrefix(columnType : string) {
         case "int":
             return "n"
         case "float":
-            return "f"
+            return "n"
         case "string":
             return "sz"
         case "bool":
             return "b"
-        case "loc":
-            return "loc"
+        case "l10n":
+            return "l10n"
+        case "int_array":
+            return "tb"
+        case "string_array":
+            return "tb"
+        case "float_array":
+            return "tb"
+        case "bool_array":
+            return "tb"
+        case "loc_array":
+            return "tb"
     }
     return "var"
 }
