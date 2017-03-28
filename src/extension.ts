@@ -106,7 +106,7 @@ function GenerateLineParseCode(columnNames : string[], columnTypes : string[]) {
     if (columnNames == null) {
         vscode.window.showErrorMessage("Cannot find column names.")
         return
-    } 
+    }
     else if(columnTypes == null) {
         vscode.window.showWarningMessage("Cannot find column types.")
     }
@@ -223,7 +223,7 @@ function GetParserType(columnType : string) {
             return "Parser.TypeArrayFloat"
         case "bool_array":
             return "Parser.TypeArrayBool"
-        case "loc_array":
+        case "l10n_array":
             return "Parser.TypeArrayL10N"
     }
     return "\"\""
@@ -249,7 +249,7 @@ function GetDefaultValueByColumnType(columnType : string) {
             return "nil"
         case "bool_array":
             return "nil"
-        case "loc_array":
+        case "l10n_array":
             return "nil"
     }
     return "\"\""
@@ -275,7 +275,7 @@ function GetColumnTypePrefix(columnType : string) {
             return "tb"
         case "bool_array":
             return "tb"
-        case "loc_array":
+        case "l10n_array":
             return "tb"
     }
     return "var"
